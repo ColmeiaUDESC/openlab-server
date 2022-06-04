@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "pre-commit": "eslint . --ext .js,.jsx,.ts,.tsx --fix && prisma format",
+    "pre-commit": "eslint . --ext .js,.jsx,.ts,.tsx --fix && prisma format"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
