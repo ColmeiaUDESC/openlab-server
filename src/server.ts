@@ -4,7 +4,7 @@ import express, { Express, Request, Response } from 'express';
 
 const app: Express = express();
 
-const host = process.env.HOST || 5000;
+const host = Number(process.env.HOST) || 5000;
 const port = process.env.PORT || 'localhost';
 
 if (process.env.ENVIRONMENT === 'dev') {
