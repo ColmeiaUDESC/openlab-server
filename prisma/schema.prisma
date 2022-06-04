@@ -11,7 +11,67 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String
+  id                 Int                  @id @default(autoincrement())
+  email              String               @unique
+  password           String
+  name               String
+  status             Boolean              @default(true)
+  role               Role                 @default(USER)
+  UserHasMachineType UserHasMachineType[]
+  Schedules          Schedules[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+}
+
+model RegisterCode {
+  id        Int      @id @default(autoincrement())
+  code      String
+  createdAt DateTime @default(now())
+}
+
+model MachineType {
+  id                 Int                  @id @default(autoincrement())
+  title              String
+  Machine            Machine[]
+  UserHasMachineType UserHasMachineType[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+}
+
+model UserHasMachineType {
+  id            Int         @id @default(autoincrement())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        Int
+  machineType   MachineType @relation(fields: [machineTypeId], references: [id])
+  machineTypeId Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Machine {
+  id            Int         @id @default(autoincrement())
+  brand         String
+  model         String
+  description   String
+  machineType   MachineType @relation(fields: [machineTypeId], references: [id])
+  machineTypeId Int
+  Schedules     Schedules[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Schedules {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  machine   Machine  @relation(fields: [machineId], references: [id])
+  machineId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
 }
