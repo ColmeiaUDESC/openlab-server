@@ -2,7 +2,13 @@
 import 'dotenv/config';
 import express, { Express, Request, Response } from 'express';
 
+import bodyParser from 'body-parser'
+import userRouter from './routes/users';
+import authRouter from './routes/auth';
+
 const app: Express = express();
+
+app.use(bodyParser.json())
 
 const host = process.env.HOST || 'localhost';
 const port = Number(process.env.PORT) || 5000;
@@ -33,8 +39,7 @@ if (process.env.ENVIRONMENT === 'dev') {
   });
 }
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, world!');
-});
+app.use('/users', userRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, () => console.log(`[openlab-client]: server running at http://${host}:${port}`));
