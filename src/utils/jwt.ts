@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken';
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET || '';
 
 const jwt = {
-  signAccessToken(payload: { email:string, name:string }) {
+  signAccessToken(payload: { id: number, email:string, name:string, role:string }) {
     return new Promise((resolve, reject) => {
       jsonwebtoken.sign({ payload }, accessTokenSecret, {}, (err: unknown, token: unknown) => {
         if (err) {

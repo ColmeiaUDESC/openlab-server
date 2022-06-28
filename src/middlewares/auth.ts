@@ -16,7 +16,7 @@ const auth = async (req: Request, res: Response, next: NextFunction): Promise<an
   }
   await jwt.verifyAccessToken(token)
     .then((user: any) => {
-      res.set(user);
+      req.body.user = user.payload;
       next();
     })
     .catch((e) => res.status(401).json({
