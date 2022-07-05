@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import userRouter from './routes/users';
 import authRouter from './routes/auth';
 import machineTypeRouter from './routes/machineTypes';
+import machineRouter from './routes/machines';
 
 const app: Express = express();
 
@@ -43,5 +44,6 @@ if (process.env.ENVIRONMENT === 'dev') {
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/machineType', machineTypeRouter);
+app.use('/machines', machineRouter);
 
 app.listen(port, () => console.log(`[openlab-client]: server running at http://${host}:${port}`));
