@@ -7,6 +7,7 @@ import userRouter from './routes/users';
 import authRouter from './routes/auth';
 import machineTypeRouter from './routes/machineTypes';
 import machineRouter from './routes/machines';
+import codeRouter from './routes/codes';
 
 const app: Express = express();
 
@@ -45,5 +46,6 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/machineType', machineTypeRouter);
 app.use('/machines', machineRouter);
+app.use('/codes', codeRouter);
 
 app.listen(port, () => console.log(`[openlab-client]: server running at http://${host}:${port}`));
